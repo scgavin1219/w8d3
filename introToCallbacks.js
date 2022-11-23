@@ -26,11 +26,11 @@ class Clock {
 
 //const clock = new Clock();
 
-// const readline = require("readline");
-// const reader = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
+const readline = require("readline");
+const reader = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
 function addNumbers(sum,numsLeft,completionCallback) {
     if (numsLeft > 0) {
@@ -70,4 +70,34 @@ Function.prototype.myBind = function(context) {
   
 //   boundTurnOn(); // should say "Turning on a lamp"
 //   myBoundTurnOn(); // should say "Turning on a lamp"
+
+
+function askIfGreaterThan(el1, el2, callback)  {
+    reader.question( `is ${el1} > ${el2} ? (y/n): `, (answer) => { 
+        let response = answer === 'y' ? true : false; 
+        callback(response);
+        
+    });
+}
+
+//askIfGreaterThan(1 , 2, (input) => { console.log(input)})
+
+function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) { 
+    if (i < arr.length - 1) {
+        console.log(arr) 
+        askIfGreaterThan(arr[i], arr[i + 1], (isGreaterThan) => {
+            if (isGreaterThan) [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+            innerBubbleSortLoop(arr, i + 1, isGreaterThan, outerBubbleSortLoop);
+            ;
+        });
+    } else { 
+        outerBubbleSortLoop(madeAnySwaps);
+        console.log(arr)
+        reader.close()
+    }
+}
+
+innerBubbleSortLoop([1,4,2], 0, false, (input)=>{console.log(input)} )
+
+
   
